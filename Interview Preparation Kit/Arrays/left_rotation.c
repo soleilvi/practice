@@ -1,3 +1,15 @@
+/*
+Exercise from the Interview Preparation Kit "Arrays" section.
+
+A program for shifting array contents d units to the left, where d is
+a number specified by the user. It first asks for the size of the
+array and d from the user, then fills an array with numbers and shifts
+them to the left. Both the original and the shifted arrays are printed
+for the user to see.
+
+By Soleil Vivero
+12/22/21
+*/
 #include <stdio.h>
 #define ROW 100
 
@@ -22,7 +34,6 @@ int main(){
 
   return 0;
 }
-
 
 void getUserInput(int *arraySize, int *leftShift){
   printf("Input the array size and left shift (format: # #): ");
