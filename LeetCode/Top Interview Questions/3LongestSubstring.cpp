@@ -2,12 +2,11 @@
 https://leetcode.com/problems/longest-substring-without-repeating-characters/
 
 By Soleil Vivero
-08/23/23
+08/25/23
 
 Solutions:
     1. Have another for-loop inside of the character for-loop that goes through past sections of the string..? (O(n^2))
     2. Don't clear everything in the map, just those characters that came before the char with a duplicate (O(n))
-        - For auto solution: not as easy with the 
 */
 
 #include <string>
@@ -15,6 +14,8 @@ Solutions:
 #include <unordered_map>
 
 using namespace std;
+
+#include <unordered_map>
 
 class Solution {
 public:
@@ -27,26 +28,32 @@ public:
         // Iterate through string characters
         for (auto &ch : s)
         {
-            // if (charMap.contains(ch))
-            // {
-            //     keyValue = charMap.at(ch);
+            // Check for duplicates
+            if (charMap.contains(ch))
+            {
+                keyValue = charMap.at(ch);
 
-            //     for (auto &item : charMap)
-            //     {
-            //         std::cout << item.first << ", " << item.second << std::endl;
-            //     }
-            // }
+                // Erase the duplicate along with any character that came before it
+                for (auto it = charMap.begin(); it != charMap.end();)
+                {
+                    if (it->second <= keyValue)
+                    {
+                        it = charMap.erase(it);
+                    }
+                    else
+                    {
+                        it++;
+                    }
+                }
+            }
 
-            charMap.insert({ch, charIndex});
+            charMap.insert({ch, charIndex++});
 
-            std::cout << "Map size: " << charMap.size() << ", Longest substring: " << longestSubstringLength << std::endl;
-
+            // Update the size of the longest substring if needed
             if (charMap.size() > longestSubstringLength)
             {
                 longestSubstringLength = charMap.size();
             }
-
-            charIndex++;
         }
 
         return longestSubstringLength;
@@ -56,21 +63,7 @@ public:
 int main()
 {
     Solution s;
-    std::string str = "abcabca";
+    std::string str = "cornycab";
 
-    std::cout << s.lengthOfLongestSubstring(str);
+    std::cout << s.lengthOfLongestSubstring(str) << " <-- Result" << std::endl;
 }
-
-/*
-for (int i = 0; i < s.length(); i++)
-{
-    charMap.insert(i, s.at(i));
-
-
-
-    if (charMap.size() > longestSubstringLength)
-    {
-        longestSubstringLength = charMap.size();
-    }
-}
-*/
