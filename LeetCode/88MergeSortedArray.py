@@ -3,7 +3,7 @@ Python 3
 https://leetcode.com/problems/merge-sorted-array/
 
 By Soleil Vivero
-09/02/23
+09/03/23
 '''
 
 class Solution:
