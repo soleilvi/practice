@@ -8,15 +8,8 @@ By Soleil Vivero
 
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-        """
-        Do not return anything, modify nums1 in-place instead.
-        """
+        for num in nums1[m:]:
+            nums1.remove(num)
 
-        while 0 in nums1:
-            nums1.remove(0)
-        
-        while 0 in nums2:
-            nums2.remove(0)
-
-        nums1 = sorted(nums1 + nums2)
-        print(nums1)
+        nums1.extend(nums2[:n])
+        nums1.sort()
