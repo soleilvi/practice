@@ -27,16 +27,22 @@ class Solution:
 
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         groupedAnagrams = []
+        anagrams = set()
 
         while strs:
             cols = []
-            cols.append(strs.pop())
 
-            for str in strs:
-                if self.isAnagram(str, cols[0]):
-                    cols.append(str)
-                    # strs.remove(str)
-            
-            groupedAnagrams.append(cols)
+            if strs[-1] not in anagrams:
+                cols.append(strs.pop())
+
+                for s in strs:
+                    if self.isAnagram(s, cols[0]):
+                        anagrams.update([s])
+                        cols.append(s)
+
+                groupedAnagrams.append(cols)
+
+            else:
+                strs.pop()
 
         return groupedAnagrams
