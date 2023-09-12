@@ -2,8 +2,25 @@
 Python 3
 https://leetcode.com/problems/group-anagrams/
 
+This was the final answer I could give without help. Though I spent a
+couple hours on it, I couldn't get my solution to be fast enough to be
+accepted by LeetCode. The actual solution was simple:
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        d = defaultdict(list)
+
+        for word in strs:
+            sortedWord = ''.join(sorted(word))
+            d[sortedWord].append(word)
+
+        return d.values()
+
+I learned a lot from this problem. Mainly, that I need to look for more
+patterns in the input they provide for these problems.
+
 By Soleil Vivero
-09/09/23
+09/11/23
 '''
 
 class Solution:
