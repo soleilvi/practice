@@ -6,17 +6,22 @@ By Soleil Vivero
 09/12/23
 '''
 
+# Maybe I can somehow use the Boyer-Moore majority voting algorithm?
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         l = []
-        d = defaultdict(int)
+        mostFrequent = -1
+        votes = 0
 
         for num in nums:
-            d[num] += 1
-
-        for i in range(k):
-            n = max(d.values())
-            l.append(n)
-            d.pop()  # Somehow remove the element using n without sort
+            if votes == 0:
+                mostFrequent = num
+                votes = 1
+                l.insert(len(l) % k, num)
+            
+            if num == mostFrequent:
+                votes += 1
+            else:
+                votes -= 1
 
         return l
