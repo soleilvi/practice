@@ -6,22 +6,19 @@ By Soleil Vivero
 09/12/23
 '''
 
-# Maybe I can somehow use the Boyer-Moore majority voting algorithm?
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         l = []
-        mostFrequent = -1
-        votes = 0
+        d = defaultdict(int)
+        previousKey = -1
 
         for num in nums:
-            if votes == 0:
-                mostFrequent = num
-                votes = 1
-                l.insert(len(l) % k, num)
+            d[num] += 1
+
+        for key in d:
+            if d.get(key) > d.get(previousKey, 0):  # I really thought this would work ;-;
+                l.insert(len(l) % k, key)
             
-            if num == mostFrequent:
-                votes += 1
-            else:
-                votes -= 1
+            previousKey = key
 
         return l
