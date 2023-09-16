@@ -3,29 +3,22 @@ Python 3
 https://leetcode.com/problems/top-k-frequent-elements/
 
 By Soleil Vivero
-09/15/23
+09/16/23
 '''
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        s = set(int)
+        l = []
         d = defaultdict(int)
 
         for num in nums:
             d[num] += 1
 
-        minListNum = d[nums[0]]  # Get the value of the first item in the 
-                                 # dictionary (python 3.7 and onward)
+        d = sorted(d.items(), key = lambda x : x[1])  # d is now a list
 
-        for key in d:
-            if len(s) < k:
-                s.append(key)
+        for i in range(k):
+            l.append(d[-(i + 1)][0])  # retrieve what would be the dic-
+                                      # tionary key starting from the 
+                                      # end of the list
 
-                if d[key] < minListNum:
-                    minListNum = d[key] 
-    
-            else:
-                if d[key] > minListNum:
-                    s[len(s) % k] = key
-
-        return s
+        return l
