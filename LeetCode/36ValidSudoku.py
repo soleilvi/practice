@@ -56,3 +56,15 @@ class Solution:
                 y = 6
 
         return True
+    
+'''
+After watching a video with another solution, here is what I learned:
+- Instead of the x and y variables, I could have simply divided each
+  index number by 3, which would have simulated a 3x3 board instead of
+  a 9x9 board. This way, i could have taken each sub-box as if it were
+  a cell in a 3x3 2D array. This implementation would require me to
+  use a dictionary of sets.
+- Using set dictionaries would have made things more readable
+- The lookup time for a set is O(1), as they implement a hash table
+  lookup algorithm
+'''
