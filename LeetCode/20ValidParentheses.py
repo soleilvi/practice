@@ -6,11 +6,9 @@ By Soleil Vivero
 11/22/23
 '''
 
-from collections import deque
-
 class Solution:
     def isValid(self, s: str) -> bool:
-        stack = deque()
+        stack = []
 
         for c in s:
             if (c == '('
@@ -18,16 +16,16 @@ class Solution:
             or c == '{'):
                 stack.append(c)
             else:
-                # no beginning parenthesis
-                if len(stack) == 0:
+                # stack is empty, there are no beginning parentheses
+                if not stack:
                     return False
 
                 # closing parenthesis doesn't match
                 elif abs(ord(c) - ord(stack.pop())) > 2:
                     return False
 
-        # Beginning parenthesis without a closing one
-        if len(stack) > 0:
+        # stack isn't empty, we're missing a closing parenthesis
+        if stack:
             return False
 
         return True
