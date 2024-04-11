@@ -2,29 +2,34 @@
 Python 3
 https://leetcode.com/problems/generate-parentheses/
 
-By Soleil Vivero
-11/29/23
-'''
+I couldn't solve this problem without help. I used this explanation
+(https://www.youtube.com/watch?v=s9fokUqJ76A) to solve it. I didn't 
+know about backtracking prior to this problem, so I learned a lot from 
+it.
 
-from collections import deque
+By Soleil Vivero
+04/11/2024
+'''
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        queue = deque(')' * n)
-        stack = deque('(' * n)
-        completeParentheses = ""
-        final = [''.join(stack + queue)]
+        stack = []
+        result = []
 
-        while len(stack) > 1 and len(queue) > 1:
-            if queue[-2] == '(':
-                completeParentheses += "()"
-                queue.pop()
-                queue.pop()
-                queue.append(stack.pop())
-            else:
-                queue.appendleft(stack.pop())
-                stack.append(queue.pop())
-
-            final.append(completeParentheses + ''.join(stack + queue))
-        
-        return final
+        def backtrack(openN, closeN):            
+            if openN == n and closeN == n:
+                result.append("".join(stack))
+                return
+            
+            if openN < n:
+                stack.append("(")
+                backtrack(openN + 1, closeN)
+                stack.pop()
+            
+            if closeN < openN:
+                stack.append(")")
+                backtrack(openN, closeN + 1)
+                stack.pop()
+            
+        backtrack(0, 0)
+        return result
