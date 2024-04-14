@@ -1,0 +1,34 @@
+'''
+Python 3
+https://leetcode.com/problems/daily-tempeatures/
+
+By Soleil Vivero
+04/13/24
+'''
+
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        temperatures_len = len(temperatures)
+        n = 0
+        result = []
+
+        for i, temperature in enumerate(temperatures):
+            # print(i, temperature)
+            
+            for j in range(i, temperatures_len):
+                # print(f"J: {j}")
+                # print(temperatures[j])
+                
+                if temperatures[j] > temperature:
+                    break
+
+                n += 1
+                
+                if j == temperatures_len - 1:
+                    n = 0
+
+            result.append(n)
+            n = 0
+
+        return result
+            
